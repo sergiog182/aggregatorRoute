@@ -13,6 +13,7 @@ public class MainRouteBuilder extends RouteBuilder{
 		.setBody(xpath("(//*[local-name()='order'])[1]"))
 		.aggregate(header("provider"), new AggregateOrders())
 		.completionTimeout(5000)
+		.completeAllOnStop()
 		.to("file:files/outgoing?fileName=${headers.provider}.xml&fileExist=append");
 	}
 }
